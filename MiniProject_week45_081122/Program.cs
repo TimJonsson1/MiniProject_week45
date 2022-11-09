@@ -56,10 +56,14 @@ while (isRunning)
             string currency = "Currency";
             string localPrice = "Local price today";
 
-            Console.WriteLine(type.PadRight(12) + brand.PadRight(12) + model.PadRight(12) + office.PadRight(12) + purchaseDate.PadRight(12) + priceUSD.PadRight(12)
-                + currency.PadRight(12) + localPrice.PadRight(12) + "\n" +
-                type.Replace(type,"----").PadRight(12) + brand.Replace(brand, "-----").PadRight(12) + model.Replace(model, "-----").PadRight(12) + 
-                office.Replace(office, "------").PadRight(12) + purchaseDate.Replace(purchaseDate, "------------").PadRight(12));
+            int spacing = 12;
+
+            Console.WriteLine(type.PadRight(spacing) + brand.PadRight(spacing) + model.PadRight(spacing) + office.PadRight(spacing) + purchaseDate.PadRight(spacing + 3)
+                + priceUSD.PadRight(spacing + 3) + currency.PadRight(spacing) + localPrice.PadRight(spacing) + "\n" +
+                type.Replace(type,"----").PadRight(spacing) + brand.Replace(brand, "-----").PadRight(spacing) + model.Replace(model, "-----").PadRight(spacing) + 
+                office.Replace(office, "------").PadRight(spacing) + purchaseDate.Replace(purchaseDate, "-------------").PadRight(spacing + 3) + 
+                priceUSD.Replace(priceUSD, "------------").PadRight(spacing + 3) + currency.Replace(currency, "--------").PadRight(spacing) + 
+                localPrice.Replace(localPrice, "-----------------").PadRight(spacing));
 
 
             List<ElectronicsClass> sortedElectronics = ElectronicsArray.OrderBy(asset => asset.Type).ToList();

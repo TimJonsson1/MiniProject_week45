@@ -19,14 +19,17 @@ namespace MiniProject_week45_081122
             if (office.Equals("Sweden"))
             {
                 Currency = "SEK";
+                localPrice = price * 10.89;
             } 
             else if (office.Equals("USA"))
             {
                 Currency = "USD";
+                localPrice = price;
             }
             else if (office.Equals("Spain"))
             {
                 Currency = "EUR";
+                localPrice = price * 1.00;
             }
         }
 
@@ -41,6 +44,8 @@ namespace MiniProject_week45_081122
         public DateTime PurchaseDate { get; set; }
 
         public string Currency { get; set; }
+
+        public double localPrice { get; set; }
 
         public virtual void Show()
         {

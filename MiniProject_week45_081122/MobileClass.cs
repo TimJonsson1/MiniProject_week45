@@ -21,8 +21,12 @@ namespace MiniProject_week45_081122
 
         public override void Show()
         {
+
+            
+
             Console.WriteLine(Type.PadRight(spacing) + "" + Brand.PadRight(spacing) + "" + ModelName.PadRight(spacing) + Office.PadRight(spacing) + 
-                ""  + PurchaseDate.ToString("dd-MM-yyyy").PadRight(spacing) + "" + Price.ToString().PadRight(spacing) + "" + Currency.PadRight(spacing) + "\n");
+                ""  + PurchaseDate.ToString("dd-MM-yyyy").PadRight(spacing) + "" + Price.ToString().PadRight(spacing) + "" + Currency.PadRight(spacing) +
+                localPrice.ToString().PadRight(spacing) + "\n");
         }
     }
 }

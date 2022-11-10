@@ -1,16 +1,23 @@
 ﻿
 //initilize variables here
 
+using Microsoft.VisualBasic;
 using MiniProject_week45_081122;
+using System.Runtime.Serialization;
+
+//Console.WriteLine("Current window width: {0}", Console.WindowWidth);
+
+Console.WindowWidth = 150;
 
 List<ElectronicsClass> ElectronicsArray = new List<ElectronicsClass>();
 
-MobileClass nokia = new MobileClass("Moblie","Nokia","X30", 550, new DateOnly(2022,05,01),"Sweden");
-MobileClass samsung = new MobileClass("Moblie", "Samsung", "Galaxy S22", 650, new DateOnly(2021, 03, 15),"Spain");
-MobileClass iphone = new MobileClass("Moblie", "Nokia", "3", 1550, new DateOnly(2017, 12, 23),"USA");
-LaptopClass asus = new LaptopClass("Laptop", "Windows", "Asus", 750, new DateOnly(2019,11,13),"Sweden");
-LaptopClass macbook = new LaptopClass("Laptop", "macOS", "McBook 13", 1750, new DateOnly(2022, 03, 05), "Spain");
-LaptopClass lenovo = new LaptopClass("Laptop", "Windows", "Lenovo", 350, new DateOnly(2015, 07, 26),"USA");
+
+MobileClass nokia = new MobileClass("Moblie","Nokia","X30", 550, new DateTime(2022,05,01),"Sweden");
+MobileClass samsung = new MobileClass("Moblie", "Samsung", "Galaxy S22", 650, new DateTime(2021, 03, 15),"Spain");
+MobileClass iphone = new MobileClass("Moblie", "Nokia", "3", 1550, new DateTime(2017, 12, 23),"USA");
+LaptopClass asus = new LaptopClass("Laptop", "Windows", "Asus", 750, new DateTime(2019,11,13),"Sweden");
+LaptopClass macbook = new LaptopClass("Laptop", "macOS", "McBook 13", 1750, new DateTime(2022, 03, 05), "Spain");
+LaptopClass lenovo = new LaptopClass("Laptop", "Windows", "Lenovo", 350, new DateTime(2015, 07, 26),"USA");
 
 
 ElectronicsArray.Add(nokia);
@@ -56,22 +63,34 @@ while (isRunning)
             string currency = "Currency";
             string localPrice = "Local price today";
 
-            int spacing = 12;
+            int spacing = 15;
 
-            Console.WriteLine(type.PadRight(spacing) + brand.PadRight(spacing) + model.PadRight(spacing) + office.PadRight(spacing) + purchaseDate.PadRight(spacing + 3)
-                + priceUSD.PadRight(spacing + 3) + currency.PadRight(spacing) + localPrice.PadRight(spacing) + "\n" +
+            Console.WriteLine(type.PadRight(spacing) + brand.PadRight(spacing) + model.PadRight(spacing) + office.PadRight(spacing) + purchaseDate.PadRight(spacing)
+                + priceUSD.PadRight(spacing) + currency.PadRight(spacing) + localPrice.PadRight(spacing) + "\n" +
                 type.Replace(type,"----").PadRight(spacing) + brand.Replace(brand, "-----").PadRight(spacing) + model.Replace(model, "-----").PadRight(spacing) + 
-                office.Replace(office, "------").PadRight(spacing) + purchaseDate.Replace(purchaseDate, "-------------").PadRight(spacing + 3) + 
-                priceUSD.Replace(priceUSD, "------------").PadRight(spacing + 3) + currency.Replace(currency, "--------").PadRight(spacing) + 
+                office.Replace(office, "------").PadRight(spacing) + purchaseDate.Replace(purchaseDate, "-------------").PadRight(spacing) + 
+                priceUSD.Replace(priceUSD, "------------").PadRight(spacing) + currency.Replace(currency, "--------").PadRight(spacing) + 
                 localPrice.Replace(localPrice, "-----------------").PadRight(spacing));
 
 
             List<ElectronicsClass> sortedElectronics = ElectronicsArray.OrderBy(asset => asset.Type).ToList();
+            DateTime dt = DateTime.Now;
+            
 
             foreach(ElectronicsClass e in sortedElectronics)
             {
-                              
-                e.Show();                
+
+                TimeSpan diff = dt - e.PurchaseDate;
+                //Console.WriteLine(diff.Days);
+
+                
+                if(diff.Days > 1095)
+                {
+                    Console.ForegroundColor = ConsoleColor.Red;
+                }
+                e.Show();
+
+                Console.ResetColor();
 
             }
             
@@ -118,8 +137,8 @@ void CreateAsset(string type)
 
                 Console.Write("Assets purchase date (write like this -> dd/MM/yyyy): ");
                 string input = Console.ReadLine();
-                DateTime Date = Convert.ToDateTime(input);
-                DateOnly assetDate = DateOnly.FromDateTime(Date);
+                DateTime assetDate = Convert.ToDateTime(input);
+                
 
                 Console.Write("What office is this from: ");
                 string assetOffice = Console.ReadLine().Trim();
@@ -161,8 +180,8 @@ void CreateAsset(string type)
 
                 Console.Write("Assets purchase date (write like this -> dd/MM/yyyy): ");
                 string input = Console.ReadLine();
-                DateTime Date = Convert.ToDateTime(input);
-                DateOnly assetDate = DateOnly.FromDateTime(Date);
+                DateTime assetDate = Convert.ToDateTime(input);
+                
 
                 Console.Write("What office is this from: ");
                 string assetOffice = Console.ReadLine().Trim();

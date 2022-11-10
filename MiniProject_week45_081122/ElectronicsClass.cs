@@ -8,13 +8,26 @@ namespace MiniProject_week45_081122
 {
     internal class ElectronicsClass
     {
-        public ElectronicsClass(string type, string modelName, double price, DateOnly purchaseDate, string office)
+        public ElectronicsClass(string type, string modelName, double price, DateTime purchaseDate, string office)
         {
             Type = type;
             ModelName = modelName;
             Price = price;
             PurchaseDate = purchaseDate;
             Office = office;
+
+            if (office.Equals("Sweden"))
+            {
+                Currency = "SEK";
+            } 
+            else if (office.Equals("USA"))
+            {
+                Currency = "USD";
+            }
+            else if (office.Equals("Spain"))
+            {
+                Currency = "EUR";
+            }
         }
 
         public string Office { get; set; }
@@ -22,9 +35,12 @@ namespace MiniProject_week45_081122
         public string Type { get; set; }
 
         public string ModelName { get; set; }
+
         public double Price { get; set; }
 
-        public DateOnly PurchaseDate { get; set; }
+        public DateTime PurchaseDate { get; set; }
+
+        public string Currency { get; set; }
 
         public virtual void Show()
         {

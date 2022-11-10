@@ -13,11 +13,11 @@ List<ElectronicsClass> ElectronicsArray = new List<ElectronicsClass>();
 
 
 MobileClass nokia = new MobileClass("Moblie","Nokia","X30", 550, new DateTime(2022,05,01),"Sweden");
-MobileClass samsung = new MobileClass("Moblie", "Samsung", "Galaxy S22", 650, new DateTime(2021, 03, 15),"Spain");
+MobileClass samsung = new MobileClass("Moblie", "Samsung", "Galaxy S22", 650, new DateTime(2020, 02, 15),"Spain");
 MobileClass iphone = new MobileClass("Moblie", "Nokia", "3", 1550, new DateTime(2019, 12, 23),"USA");
 LaptopClass asus = new LaptopClass("Laptop", "Windows", "Asus", 750, new DateTime(2019,11,13),"Sweden");
 LaptopClass macbook = new LaptopClass("Laptop", "macOS", "McBook 13", 1750, new DateTime(2022, 03, 05), "Spain");
-LaptopClass lenovo = new LaptopClass("Laptop", "Windows", "Lenovo", 350, new DateTime(2017, 07, 26),"USA");
+LaptopClass lenovo = new LaptopClass("Laptop", "Windows", "Lenovo", 350, new DateTime(2021, 07, 26),"USA");
 
 
 ElectronicsArray.Add(nokia);
@@ -65,17 +65,17 @@ while (isRunning)
                 priceUSD.Replace(priceUSD, "------------").PadRight(spacing) + currency.Replace(currency, "--------").PadRight(spacing) + 
                 localPrice.Replace(localPrice, "-----------------").PadRight(spacing));
 
-           
+
 
             List<ElectronicsClass> sortedElectronics = ElectronicsArray.OrderBy(asset => asset.PurchaseDate).ToList();
-            sortedElectronics = ElectronicsArray.OrderBy(asset => asset.Office).ToList();
+            List<ElectronicsClass> sortedElectronics2 = sortedElectronics.OrderBy(asset => asset.Office).ToList();
             //sortedElectronics.OrderBy(asset => asset.PurchaseDate).ToList();
 
 
             DateTime dt = DateTime.Now;
             
 
-            foreach(ElectronicsClass e in sortedElectronics)
+            foreach(ElectronicsClass e in sortedElectronics2)
             {
 
                 TimeSpan diff = dt - e.PurchaseDate;
@@ -85,7 +85,11 @@ while (isRunning)
                 if(diff.Days > 1004)
                 {
                     Console.ForegroundColor = ConsoleColor.Red;
-                }
+                } 
+                else if (diff.Days > 913)
+                {
+                    Console.ForegroundColor = ConsoleColor.Yellow;
+                } 
                 e.Show();
 
                 Console.ResetColor();

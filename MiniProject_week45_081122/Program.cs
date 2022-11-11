@@ -36,8 +36,8 @@ bool isRunning = true;
 while (isRunning)
 {
 
-    Console.WriteLine("press 1 to view all the assets\n" +
-        "press 2 to quit");
+    Console.WriteLine("press 1 to view all the assets\n" + "press 2 to create new asset\n" +
+        "press 3 to quit");
     string choice = Console.ReadLine();
 
     switch (choice)
@@ -98,8 +98,18 @@ while (isRunning)
             
 
             break;
-        
+
         case "2":
+
+            Console.WriteLine("What typ of asset do you want to create?\n" +
+                "(1) for Laptop\n" +
+                "(2) for Mobile");
+
+            createAsset(Console.ReadLine());
+
+            break;
+        
+        case "3":
 
             isRunning = false;
             Console.WriteLine("quiting");
@@ -117,7 +127,92 @@ while (isRunning)
 }
 
 
+void createAsset(string type)
+{
+    switch (type)
+    {
+        case"1":
 
+            try
+            {
+                Console.Write("Assets Operating system: ");
+                string assetOS = Console.ReadLine().Trim();
+
+                Console.Write("Assets name: ");
+                string assetName = Console.ReadLine().Trim();
+
+                Console.Write("Assets Price in USD: ");
+                double assetPrice = Double.Parse(Console.ReadLine());
+                
+                Console.Write("What office is this from: ");
+                string assetOffice = Console.ReadLine().Trim();
+                
+                Console.Write("Assets purchase date (write like this -> dd/MM/yyyy): ");
+                string input = Console.ReadLine();
+                DateTime assetDate = Convert.ToDateTime(input);
+
+               
+                string assetType = "Laptop";
+
+                LaptopClass laptop = new LaptopClass(assetType, assetOS, assetName, assetPrice, assetDate, assetOffice);
+
+                ElectronicsArray.Add(laptop);
+
+
+
+
+            }
+            catch (System.Exception e)
+            {
+                Console.WriteLine("Check you have the right inputs, You can only use numbers for price and date is entered like 'dd/MM/yyyy'");
+                Console.WriteLine(e);
+            }
+                break;
+
+        case "2":
+
+            try
+            {
+                Console.Write("Assets brand: ");
+                string assetBrand = Console.ReadLine().Trim();
+
+                Console.Write("Assets name: ");
+                string assetName = Console.ReadLine().Trim();
+
+                Console.Write("Assets Price in USD: ");
+                double assetPrice = Double.Parse(Console.ReadLine());
+ 
+                Console.Write("What office is this from: ");
+                string assetOffice = Console.ReadLine().Trim();
+                
+                Console.Write("Assets purchase date (write like this -> dd/MM/yyyy): ");
+                string input = Console.ReadLine();
+                DateTime assetDate = Convert.ToDateTime(input);
+             
+
+                string assetType = "Phone";
+
+                MobileClass mobile = new MobileClass(assetType, assetBrand, assetName, assetPrice, assetDate, assetOffice);
+
+                ElectronicsArray.Add(mobile);
+
+            }
+            catch (System.Exception e)
+            {
+                Console.WriteLine("Check you have the right inputs, You can only use numbers for price and date is entered like 'dd/MM/yyyy'");
+                Console.WriteLine(e);
+
+            }
+
+            break;
+
+        default:
+
+            Console.WriteLine("Can only use the choice of 1 or 2");
+
+            break;
+    }
+}
 
 
 
